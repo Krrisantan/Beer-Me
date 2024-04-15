@@ -1,27 +1,17 @@
-import './Header.scss';
-import { Link } from 'react-router-dom';
-import Logo from '../../assets/logo.png'
+import "./Header.scss";
+import { Link } from "react-router-dom";
 
 function Header() {
-    
-    return (
-        <div className='header'>
-            <div className='header__logo'>
-<Link to="/">
-<img src={Logo} alt="K's Bar & Grill logo" className='' />
-</Link>
-            </div>
-            <div className='header__text'>
-This is the Header! <br />
-
-K's Bar and Grill <br />
-Drop Down Menus? <br />
-Sticky?
-
-            </div>
-
-        </div>
-    )
+  return (
+    <div className="header">
+      <Link to="/">
+        <button>HOME</button>
+      </Link>
+      <Link to="/">
+        <button>ABOUT</button>
+      </Link>
+    </div>
+  );
 }
 
 export default Header;

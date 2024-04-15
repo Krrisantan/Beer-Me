@@ -1,17 +1,16 @@
-import './Footer.scss';
+import "./Footer.scss";
 
 function Footer() {
-    
-    return (
-        <div className='footer'>
-This is the footer!
-
-My IRL contact info
-github
-linked in 
-
-        </div>
-    )
+  return (
+    <div className="footer">
+      <div className="footer__contact-container">
+        <h1>CONTACT INFO</h1>
+        <p>krrisantan@proton.me</p>
+        <p>linkedin.com/in/kristopher-koski</p>
+        <p>github.com/Krrisantan</p>
+      </div>
+    </div>
+  );
 }
 
 export default Footer;

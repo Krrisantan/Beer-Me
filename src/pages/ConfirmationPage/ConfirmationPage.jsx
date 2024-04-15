@@ -1,8 +1,6 @@
 import axios from "axios";
-import "./ConfirmationPage";
 import "./ConfirmationPage.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 function ConfirmationPage({ orderItems, totalDrinkOrder }) {
   const navigate = useNavigate();
@@ -15,11 +13,6 @@ function ConfirmationPage({ orderItems, totalDrinkOrder }) {
   console.log(drinkOrderItems[0].quantity);
   console.log(drinkOrderItems[0].table);
 
-  // const totalDrinkOrder = new URLSearchParams(location.search).get("totalDrinkOrder");
-
-  // const {selectedFoodOption,orderItem} = location.state;
-  // console.log(selectedFoodOption);
-
   console.log(drinkOrderItems, "drink order items");
   console.log(totalDrinkOrder);
 
@@ -27,52 +20,26 @@ function ConfirmationPage({ orderItems, totalDrinkOrder }) {
     e.preventDefault();
     console.log(e.target);
     console.log("Food should be added");
-    // const getFoodMenuItem = async () => {
+
     try {
       for (let i = 0; i < drinkOrderItems.length; i++) {
         const drinkName = drinkOrderItems[i].name;
         console.log(drinkName);
         const drinkNumber = drinkOrderItems[i].quantity;
-        const drinkTable = drinkOrderItems[i].table;
         const response = await axios.post(
           "http://localhost:8080/ordersRoutes/orders",
           {
-            // orderItem: drinkOrderItems.map(item => ({ ...item, name: item.name })),
             quantity: drinkNumber,
             name: drinkName,
             table_number: `5`,
-
-            // order: {orderItems}
           }
         );
         console.log("Order confirmed", response.data);
         navigate("/");
       }
-      // const response = await axios.post("http://localhost:8080/ordersRoutes/orders", {
-      //     // orderItem: drinkOrderItems.map(item => ({ ...item, name: item.name })),
-      //     quantity: selectedDrinkOption,
-      //     name: "{item.name}"
-
-      //     // order: {orderItems}
-      // })
-      // console.log("Order confirmed", response.data);
     } catch (error) {
       console.error("Failed to confirm order", error);
     }
-    // if (drinkOrderItems) {
-    //     try {
-    //         const response = await axios.post("http://localhost:8080/ordersRoutes/orders", {
-    //             // Include name along with order data
-    //             orderItem: drinkOrderItems.map(item => ({ ...item, name: item.name })),
-    //             quantity: selectedDrinkOption
-    //         })
-    //         console.log("Order confirmed", response.data);
-    //     } catch (error) {
-    //        console.error("Failed to confirm order", error);
-    //     }
-    // } else {
-    //     console.error("drinkOrderItems is undefined");
-    // }
   };
 
   return (
@@ -86,13 +53,11 @@ function ConfirmationPage({ orderItems, totalDrinkOrder }) {
               orderItems.map((item, index) => (
                 <p key={index} onClick={submitHandler}>
                   Order placed for {item.name}, quantity {selectedDrinkOption},
-                  {/* {totalDrinkOrder} */}
                 </p>
               ))
             ) : (
               <p>No items ordered</p>
             )}
-            {/* <p>Order placed for (DRINKS) quantity {selectedDrinkOption}</p> */}
           </li>
         </ul>
       </form>{" "}

@@ -1,6 +1,5 @@
 import "./App.scss";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage/HomePage";
