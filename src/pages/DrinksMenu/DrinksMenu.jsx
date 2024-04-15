@@ -64,7 +64,7 @@ const handleDrinkOrder = (id) => {
 
         setDrinkOrderItems(drinkMenuItem.filter((item)=> item.ordered === true))
         setOrderItems([...orderItems, selectedDrink])
-        console.log(orderItems)
+        // console.log(orderItems)
     }
 };
 
@@ -95,7 +95,7 @@ const handleDrinkOrder = (id) => {
 const totalDrinkOrder = 
     drinkOrderItems.map((item) => (<span>{item.name}</span>))
 
-// console.log(totalDrinkOrder);
+// console.log(totalDrinkOrder[0].props.children);
     
     return (
         <div>
@@ -145,9 +145,16 @@ const totalDrinkOrder =
             </p>
             <p>Selected quantity: {selectedDrinkOption} </p>
             <Link to="/ConfirmationPage" 
-            state={{ selectedDrinkOption: selectedDrinkOption, orderItems: drinkOrderItems }}
-            totalDrinkOrder = {totalDrinkOrder}
+            // state={{ totalDrinkOrder: totalDrinkOrder }}
+             state={{ selectedDrinkOption: selectedDrinkOption, drinkOrderItems: drinkOrderItems}}
+             totalDrinkOrder = {totalDrinkOrder}
+             drinkOrderItems={drinkOrderItems}
                  >
+
+{/* <Link to="/ConfirmationPage" 
+      state={{ selectedDrinkOption: selectedDrinkOption, drinkOrderItems: drinkOrderItems }} // Pass drinkOrderItems instead of orderItems
+      totalDrinkOrder={totalDrinkOrder}
+> */}
                 {/* <button onClick={drinkConfirmation}>Confirm</button> */}
                 <button >Confirm</button>
             </Link>
