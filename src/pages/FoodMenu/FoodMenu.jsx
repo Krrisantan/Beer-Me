@@ -3,19 +3,34 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function FoodMenu({ foodMenuItem, orderItems, setOrderItems }) {
-  const [foodQuantities, setFoodQuantities] = useState({});
+  const [foodQuantities, setFoodQuantities] = useState("");
   const [selectedFoodOption, setSelectedFoodOption] = useState("0");
   const [foodOrderItems, setFoodOrderItems] = useState([]);
 
   const handleFoodQuantityChange = (id, quantity) => {
-    setFoodQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: quantity,
-    }));
+    console.log(id);
+    console.log(quantity);
+    setFoodQuantities(quantity);
+    setSelectedFoodOption(quantity);
+    const selectedFood = foodMenuItem.find((item) => item.id === id);
+    const existingFoodIndex = foodMenuItem.findIndex((item) => item.id === id);
+    if (existingFoodIndex !== -1) {
+      foodMenuItem[existingFoodIndex].ordered = true;
+      foodMenuItem[existingFoodIndex].quantity = quantity;
+    }
+    console.log(selectedFood);
+    setFoodOrderItems(foodMenuItem.filter((item) => item.ordered === true));
+    setFoodOrderItems([...orderItems, selectedFood]);
   };
+  // const handleFoodQuantityChange = (id, quantity) => {
+  //   setFoodQuantities((prevQuantities) => ({
+  //     ...prevQuantities,
+  //     [id]: quantity,
+  //   }));
+  // };
 
   const getFoodQuantity = (id) => {
-    return foodQuantities[id] || "1";
+    return foodQuantities[id] || "0";
   };
 
   const handleFoodOrder = (id) => {
@@ -24,6 +39,11 @@ function FoodMenu({ foodMenuItem, orderItems, setOrderItems }) {
     if (existingFoodIndex !== -1) {
       foodMenuItem[existingFoodIndex].ordered = true;
       foodMenuItem[existingFoodIndex].quantity = selectedFoodOption;
+      if (foodQuantities !== "") {
+        foodMenuItem[existingFoodIndex].quantity = foodQuantities;
+      } else {
+        foodMenuItem[existingFoodIndex].quantity = 1;
+      }
       setFoodOrderItems(foodMenuItem.filter((item) => item.ordered === true));
       setFoodOrderItems([...orderItems, selectedFood]);
     }
@@ -80,14 +100,14 @@ function FoodMenu({ foodMenuItem, orderItems, setOrderItems }) {
                 />
                 <label>
                   <select
-                    value={getFoodQuantity(food.id)}
                     onChange={(e) =>
+                      // on={(e) =>
+                      // handleFoodQuantityChange(food.id, e.target.value)
                       handleFoodQuantityChange(food.id, e.target.value)
                     }
                   >
-                    <option value="1" id={food.id}>
-                      1
-                    </option>
+                    <option value="0">Select option</option>
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -104,11 +124,13 @@ function FoodMenu({ foodMenuItem, orderItems, setOrderItems }) {
         {totalFoodOrder}
       </p>
       <p>Selected quantity: {selectedFoodOption}</p>
+      <p>Selected quantity: {foodQuantities}</p>
       <Link
         to="/ConfirmationPage"
         state={{
           selectedFoodOption: selectedFoodOption,
           foodOrderItems: foodOrderItems,
+          foodQuantities: foodQuantities,
         }}
         totalFoodOrder={totalFoodOrder}
         foodOrderItems={foodOrderItems}
