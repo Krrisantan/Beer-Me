@@ -8,12 +8,12 @@ function HomePage() {
       <div className="homepage__hero">
         <img src={heropic} alt="beer toasting" className="homepage__heropic" />
         <div className="homepage__buttons-container">
-          <Link to="/FoodMenu">
-            <button className="homepage__food-button, button">FOOD</button>
+          <Link to="/FoodDrinksMenu">
+            <button className="homepage__food-button, button">MENU</button>
           </Link>
-          <Link to="/DrinksMenu">
+          {/* <Link to="/FoodDrinksMenu">
             <button className="homepage__drinks-button, button">DRINKS</button>
-          </Link>
+          </Link> */}
         </div>
       </div>
       {/* This is the Home Page! */}

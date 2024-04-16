@@ -3,43 +3,45 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage/HomePage";
-import DrinksMenu from "./pages/DrinksMenu/DrinksMenu";
-import FoodMenu from "./pages/FoodMenu/FoodMenu";
+// import DrinksMenu from "./pages/DrinksMenu/DrinksMenu";
+import FoodDrinksMenu from "./pages/FoodDrinksMenu/FoodDrinksMenu";
 import ConfirmationPage from "./pages/ConfirmationPage/ConfirmationPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [foodMenuItem, setFoodMenuItem] = useState([]);
+  const [foodDrinksMenuItem, setFoodDrinksMenuItem] = useState([]);
   const [orderItems, setOrderItems] = useState([]);
 
   useEffect(() => {
-    const getFoodMenuItem = async () => {
+    const getFoodDrinksMenuItem = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/foodRoutes");
-        const foodData = response.data;
-        setFoodMenuItem(foodData);
+        const response = await axios.get(
+          "http://localhost:8888/foodDrinksRoutes"
+        );
+        const foodDrinksData = response.data;
+        setFoodDrinksMenuItem(foodDrinksData);
       } catch (error) {
         console.error("Failed to fetch food menu list: ", error);
       }
     };
-    getFoodMenuItem();
+    getFoodDrinksMenuItem();
   }, []);
 
-  const [drinkMenuItem, setDrinkMenuItem] = useState([]);
+  // const [drinkMenuItem, setDrinkMenuItem] = useState([]);
 
-  useEffect(() => {
-    const getDrinkMenuItem = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/drinksRoutes");
-        const drinkData = response.data;
-        setDrinkMenuItem(drinkData);
-      } catch (error) {
-        console.error("Failed to fetch drinks menu list: ", error);
-      }
-    };
-    getDrinkMenuItem();
-  }, []);
+  // useEffect(() => {
+  //   const getDrinkMenuItem = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:8888/drinksRoutes");
+  //       const drinkData = response.data;
+  //       setDrinkMenuItem(drinkData);
+  //     } catch (error) {
+  //       console.error("Failed to fetch drinks menu list: ", error);
+  //     }
+  //   };
+  //   getDrinkMenuItem();
+  // }, []);
 
   return (
     <div className="App">
@@ -48,16 +50,16 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
-            path="/DrinksMenu"
+            path="/FoodDrinksMenu"
             element={
-              <DrinksMenu
-                drinkMenuItem={drinkMenuItem}
+              <FoodDrinksMenu
+                foodDrinksMenuItem={foodDrinksMenuItem}
                 setOrderItems={setOrderItems}
                 orderItems={orderItems}
               />
             }
           />
-          <Route
+          {/* <Route
             path="/FoodMenu"
             element={
               <FoodMenu
@@ -66,7 +68,7 @@ function App() {
                 orderItems={orderItems}
               />
             }
-          />
+          /> */}
           <Route
             path="/ConfirmationPage"
             element={<ConfirmationPage orderItems={orderItems} />}

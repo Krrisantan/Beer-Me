@@ -1,0 +1,22 @@
+img {
+    width: 50px;
+}
+
+.menu {
+    &__item-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+    &__pic {
+flex: 1;
+
+    }
+    &__details {
+flex: 1;
+    }
+    &__checkbox-quantity {
+flex: 1;
+    }
+}

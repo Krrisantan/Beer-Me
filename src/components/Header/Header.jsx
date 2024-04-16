@@ -5,10 +5,10 @@ function Header() {
   return (
     <div className="header">
       <Link to="/">
-        <button>HOME</button>
+        <button className="header__button">HOME</button>
       </Link>
       <Link to="/">
-        <button>ABOUT</button>
+        <button className="header__button">ABOUT</button>
       </Link>
     </div>
   );

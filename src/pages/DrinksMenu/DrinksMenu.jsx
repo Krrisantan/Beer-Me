@@ -8,6 +8,11 @@ function DrinksMenu({ drinkMenuItem, orderItems, setOrderItems }) {
   const [drinkOrderItems, setDrinkOrderItems] = useState([]);
 
   const handleDrinkQuantityChange = (id, quantity) => {
+    console.log(id);
+    console.log(quantity);
+    setDrinkQuantities(quantity);
+    setSelectedDrinkOption(quantity);
+
     setDrinkQuantities((prevQuantities) => ({
       ...prevQuantities,
       [id]: quantity,

@@ -6,31 +6,27 @@ function ConfirmationPage({
   orderItems,
   totalDrinkOrder,
   totalFoodOrder,
+  totalFoodDrinksOrder,
   //   foodOrderItems,
 }) {
   const navigate = useNavigate();
   console.log(orderItems);
   const location = useLocation();
   const {
-    selectedDrinkOption,
-    drinkOrderItems,
-    selectedFoodOption,
-    foodOrderItems,
-    foodQuantities,
+    selectedFoodDrinksOption,
+    foodDrinksOrderItems,
+    foodDrinksQuantities,
   } = location.state;
-  console.log(selectedDrinkOption);
-  console.log(drinkOrderItems);
-  console.log(foodOrderItems);
-  console.log(selectedFoodOption);
-  console.log(totalFoodOrder);
-  console.log(foodOrderItems);
-  console.log(foodQuantities);
-  //   console.log(drinkOrderItems[0].name);
-  //   console.log(drinkOrderItems[0].quantity);
-  //   console.log(drinkOrderItems[0].table);
+  console.log(selectedFoodDrinksOption);
+  console.log(totalFoodDrinksOrder);
+  console.log(foodDrinksOrderItems);
+  console.log(foodDrinksQuantities);
+  console.log(foodDrinksOrderItems[0].name);
+  console.log(foodDrinksOrderItems[0].quantity);
+  console.log(foodDrinksOrderItems[0].table);
 
-  console.log(drinkOrderItems, "drink order items");
-  console.log(totalDrinkOrder);
+  console.log(foodDrinksOrderItems, "food & drinks order items");
+  console.log(totalFoodDrinksOrder);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -38,38 +34,38 @@ function ConfirmationPage({
     console.log("i run");
 
     try {
-      if (selectedDrinkOption && drinkOrderItems) {
-        for (let i = 0; i < drinkOrderItems.length; i++) {
-          const drinkName = drinkOrderItems[i].name;
-          console.log(drinkName);
-          const drinkNumber = drinkOrderItems[i].quantity;
+      if (selectedFoodDrinksOption && foodDrinksOrderItems) {
+        for (let i = 0; i < foodDrinksOrderItems.length; i++) {
+          const foodDrinksName = foodDrinksOrderItems[i].name;
+          console.log(foodDrinksName);
+          const foodDrinksNumber = foodDrinksOrderItems[i].quantity;
           const response = await axios.post(
-            "http://localhost:8080/ordersRoutes/orders",
+            "http://localhost:8888/ordersRoutes/orders",
             {
-              quantity: drinkNumber,
-              name: drinkName,
+              quantity: foodDrinksNumber,
+              name: foodDrinksName,
               table_number: `5`,
             }
           );
-          console.log("Drink Order confirmed", response.data);
+          console.log("Food & Drinks Order confirmed", response.data);
           navigate("/");
           return;
         }
       }
-      if (foodOrderItems || selectedFoodOption) {
-        for (let i = 0; i < foodOrderItems.length; i++) {
-          const foodName = foodOrderItems[i].name;
-          console.log(foodName);
-          const foodNumber = foodOrderItems[i].quantity;
+      if (foodDrinksOrderItems || selectedFoodDrinksOption) {
+        for (let i = 0; i < foodDrinksOrderItems.length; i++) {
+          const foodDrinksName = foodDrinksOrderItems[i].name;
+          console.log(foodDrinksName);
+          const foodDrinksNumber = foodDrinksOrderItems[i].quantity;
           const response = await axios.post(
-            "http://localhost:8080/ordersRoutes/orders",
+            "http://localhost:8888/ordersRoutes/orders",
             {
-              quantity: foodNumber,
-              name: foodName,
+              quantity: foodDrinksNumber,
+              name: foodDrinksName,
               table_number: `5`,
             }
           );
-          console.log("Food Order confirmed", response.data);
+          console.log("Food and now Drinks Order confirmed", response.data);
           navigate("/");
           return;
         }
@@ -78,7 +74,7 @@ function ConfirmationPage({
       console.error("Failed to confirm order", error);
     }
 
-    if (selectedDrinkOption && drinkOrderItems && orderItems) {
+    if (selectedFoodDrinksOption && foodDrinksOrderItems && orderItems) {
       return (
         <div>
           This is the Confirmation Page!
@@ -90,7 +86,7 @@ function ConfirmationPage({
                   orderItems.map((item, index) => (
                     <p key={index} onClick={submitHandler}>
                       Order placed for {item.name}, quantity{" "}
-                      {selectedDrinkOption},
+                      {selectedFoodDrinksOption},
                     </p>
                   ))
                 ) : (
@@ -112,9 +108,9 @@ function ConfirmationPage({
 
   if (
     totalFoodOrder ||
-    foodOrderItems ||
-    selectedFoodOption ||
-    foodQuantities
+    foodDrinksOrderItems ||
+    selectedFoodDrinksOption ||
+    foodDrinksQuantities
   ) {
     return (
       <div>
@@ -123,10 +119,11 @@ function ConfirmationPage({
           <h2>Your order</h2>
           <ul>
             <li>
-              {foodOrderItems && foodOrderItems.length > 0 ? (
-                foodOrderItems.map((item, index) => (
+              {foodDrinksOrderItems && foodDrinksOrderItems.length > 0 ? (
+                foodDrinksOrderItems.map((item, index) => (
                   <p key={index} onClick={submitHandler}>
-                    Order placed for {item.name}, quantity {foodQuantities}
+                    Order placed for {item.name}, quantity{" "}
+                    {foodDrinksQuantities}
                   </p>
                 ))
               ) : (
