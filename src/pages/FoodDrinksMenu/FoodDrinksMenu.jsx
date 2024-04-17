@@ -3,63 +3,23 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function FoodDrinksMenu({ foodDrinksMenuItem, orderItems, setOrderItems }) {
-  const [foodDrinksQuantities, setFoodDrinksQuantities] = useState("");
-  const [selectedFoodDrinksOption, setSelectedFoodDrinksOption] = useState("0");
   const [foodDrinksOrderItems, setFoodDrinksOrderItems] = useState([]);
-
-  const handleFoodDrinksQuantityChange = (id, quantity) => {
-    console.log(id);
-    console.log(quantity);
-    setFoodDrinksQuantities(quantity);
-    setSelectedFoodDrinksOption(quantity);
-    const selectedFoodDrinks = foodDrinksMenuItem.find(
-      (item) => item.id === id
-    );
-    const existingFoodDrinksIndex = foodDrinksMenuItem.findIndex(
-      (item) => item.id === id
-    );
-    if (existingFoodDrinksIndex !== -1) {
-      foodDrinksMenuItem[existingFoodDrinksIndex].ordered = true;
-      foodDrinksMenuItem[existingFoodDrinksIndex].quantity = quantity;
-    }
-    console.log(selectedFoodDrinks);
-    setFoodDrinksOrderItems(
-      foodDrinksMenuItem.filter((item) => item.ordered === true)
-    );
-    setFoodDrinksOrderItems([...orderItems, selectedFoodDrinks]);
-  };
-  // const handleFoodQuantityChange = (id, quantity) => {
-  //   setFoodQuantities((prevQuantities) => ({
-  //     ...prevQuantities,
-  //     [id]: quantity,
-  //   }));
-  // };
-
-  const getFoodDrinksQuantity = (id) => {
-    return foodDrinksQuantities[id] || "0";
-  };
 
   const handleFoodDrinksOrder = (id) => {
     const selectedFoodDrinks = foodDrinksMenuItem.find(
       (item) => item.id === id
     );
+    console.log(selectedFoodDrinks);
     const existingFoodDrinksIndex = foodDrinksMenuItem.findIndex(
       (item) => item.id === id
     );
+    console.log(existingFoodDrinksIndex);
     if (existingFoodDrinksIndex !== -1) {
       foodDrinksMenuItem[existingFoodDrinksIndex].ordered = true;
-      foodDrinksMenuItem[existingFoodDrinksIndex].quantity =
-        selectedFoodDrinksOption;
-      if (foodDrinksQuantities !== "") {
-        foodDrinksMenuItem[existingFoodDrinksIndex].quantity =
-          foodDrinksQuantities;
-      } else {
-        foodDrinksMenuItem[existingFoodDrinksIndex].quantity = 1;
-      }
       setFoodDrinksOrderItems(
         foodDrinksMenuItem.filter((item) => item.ordered === true)
       );
-      setFoodDrinksOrderItems([...orderItems, selectedFoodDrinks]);
+      setOrderItems([...orderItems, selectedFoodDrinks]);
     }
   };
 
@@ -87,33 +47,24 @@ function FoodDrinksMenu({ foodDrinksMenuItem, orderItems, setOrderItems }) {
   ));
 
   return (
-    <div>
-      {/* This is the Food & Drinks Menu!
-      <Link to="/">
-        <button>HOME</button>
-      </Link> */}
-      <form>
-        <ul>
+    <div className="menu">
+      <form className="menu__form">
+        <ul className="menu__ul">
           {foodDrinksMenuItem?.map((food) => (
             <li
+              className="menu__li"
               key={`/FoodDrinksMenu/${food.id}`}
               onSubmit={handleFoodDrinksForm}
             >
               <div className="menu__item-container">
-                <div className="menu__pic">
-                  <img
-                    src={food.image}
-                    alt={food.name}
-                    className="foodMenu__pic"
-                  />
+                <div className="menu__pic-container">
+                  <img src={food.image} alt={food.name} className="menu__pic" />
                 </div>
                 <div className="menu__details">
-                  <h3>{food.name}</h3>
-                  <h4>{food.description}</h4>
-                  <p>{food.price}</p>
-                </div>
-                <div className="menu__checkbox-quantity">
+                  <h3 className="menu__name">{food.name}</h3>
+                  <p className="menu__price">${food.price}</p>
                   <input
+                    className="menu__checkbox"
                     type="checkbox"
                     onChange={(event) => {
                       console.log(event.target.checked);
@@ -124,50 +75,32 @@ function FoodDrinksMenu({ foodDrinksMenuItem, orderItems, setOrderItems }) {
                       }
                     }}
                   />
-                  <label>
-                    <select
-                      onChange={(e) =>
-                        // on={(e) =>
-                        // handleFoodQuantityChange(food.id, e.target.value)
-                        handleFoodDrinksQuantityChange(food.id, e.target.value)
-                      }
-                    >
-                      <option value="0">Select option</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                    </select>
-                  </label>
                 </div>
               </div>
             </li>
           ))}
         </ul>
       </form>
-      <div className="foodOrder">
-        <p>
-          Order Item:
-          {totalFoodDrinksOrder}
-        </p>
-        <p>Selected quantity: {selectedFoodDrinksOption}</p>
-        <p>Selected quantity: {foodDrinksQuantities}</p>
-        <Link
-          to="/ConfirmationPage"
-          state={{
-            selectedFoodDrinksOption: selectedFoodDrinksOption,
-            foodDrinksOrderItems: foodDrinksOrderItems,
-            foodDrinksQuantities: foodDrinksQuantities,
-          }}
-          totalFoodDrinksOrder={totalFoodDrinksOrder}
-          foodDrinksOrderItems={foodDrinksOrderItems}
-        >
-          <button>Confirm</button>
-        </Link>
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
+      <div className="menu__order--container">
+        <div className="menu__order">
+          <p className="menu__order--item">
+            Order Item:
+            {totalFoodDrinksOrder}
+          </p>
+          <Link
+            to="/ConfirmationPage"
+            state={{
+              foodDrinksOrderItems: foodDrinksOrderItems,
+            }}
+            totalFoodDrinksOrder={totalFoodDrinksOrder}
+            foodDrinksOrderItems={foodDrinksOrderItems}
+          >
+            <button className="menu__button">CONFIRM</button>
+          </Link>
+          <Link to="/">
+            <button className="menu__button">cancel</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

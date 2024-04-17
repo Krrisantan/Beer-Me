@@ -1,4 +1,12 @@
 .footer {
-    // height: 10vh;
-    background-color: aqua;
+  background-color: #00224d;
+  padding: 3rem;
+  &__contact-container {
+    padding: 2rem;
+    background-color: #ff204e;
+    border-radius: 6px;
+  }
+  &__title {
+    color: #00224d;
+  }
 }

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage/HomePage";
-// import DrinksMenu from "./pages/DrinksMenu/DrinksMenu";
 import FoodDrinksMenu from "./pages/FoodDrinksMenu/FoodDrinksMenu";
 import ConfirmationPage from "./pages/ConfirmationPage/ConfirmationPage";
 import { useEffect, useState } from "react";
@@ -28,21 +27,6 @@ function App() {
     getFoodDrinksMenuItem();
   }, []);
 
-  // const [drinkMenuItem, setDrinkMenuItem] = useState([]);
-
-  // useEffect(() => {
-  //   const getDrinkMenuItem = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:8888/drinksRoutes");
-  //       const drinkData = response.data;
-  //       setDrinkMenuItem(drinkData);
-  //     } catch (error) {
-  //       console.error("Failed to fetch drinks menu list: ", error);
-  //     }
-  //   };
-  //   getDrinkMenuItem();
-  // }, []);
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -59,16 +43,6 @@ function App() {
               />
             }
           />
-          {/* <Route
-            path="/FoodMenu"
-            element={
-              <FoodMenu
-                foodMenuItem={foodMenuItem}
-                setOrderItems={setOrderItems}
-                orderItems={orderItems}
-              />
-            }
-          /> */}
           <Route
             path="/ConfirmationPage"
             element={<ConfirmationPage orderItems={orderItems} />}

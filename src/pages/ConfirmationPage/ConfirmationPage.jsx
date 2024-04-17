@@ -4,10 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function ConfirmationPage({
   orderItems,
-  totalDrinkOrder,
-  totalFoodOrder,
+  // totalDrinkOrder,
+  // totalFoodOrder,
   totalFoodDrinksOrder,
-  //   foodOrderItems,
 }) {
   const navigate = useNavigate();
   console.log(orderItems);
@@ -38,11 +37,9 @@ function ConfirmationPage({
         for (let i = 0; i < foodDrinksOrderItems.length; i++) {
           const foodDrinksName = foodDrinksOrderItems[i].name;
           console.log(foodDrinksName);
-          const foodDrinksNumber = foodDrinksOrderItems[i].quantity;
           const response = await axios.post(
             "http://localhost:8888/ordersRoutes/orders",
             {
-              quantity: foodDrinksNumber,
               name: foodDrinksName,
               table_number: `5`,
             }
@@ -56,11 +53,9 @@ function ConfirmationPage({
         for (let i = 0; i < foodDrinksOrderItems.length; i++) {
           const foodDrinksName = foodDrinksOrderItems[i].name;
           console.log(foodDrinksName);
-          const foodDrinksNumber = foodDrinksOrderItems[i].quantity;
           const response = await axios.post(
             "http://localhost:8888/ordersRoutes/orders",
             {
-              quantity: foodDrinksNumber,
               name: foodDrinksName,
               table_number: `5`,
             }
@@ -85,8 +80,7 @@ function ConfirmationPage({
                 {orderItems && orderItems.length > 0 ? (
                   orderItems.map((item, index) => (
                     <p key={index} onClick={submitHandler}>
-                      Order placed for {item.name}, quantity{" "}
-                      {selectedFoodDrinksOption},
+                      Order placed for: {item.name}
                     </p>
                   ))
                 ) : (
@@ -106,37 +100,41 @@ function ConfirmationPage({
     }
   };
 
-  if (
-    totalFoodOrder ||
-    foodDrinksOrderItems ||
-    selectedFoodDrinksOption ||
-    foodDrinksQuantities
-  ) {
+  if (foodDrinksOrderItems || selectedFoodDrinksOption) {
     return (
-      <div>
-        This is the Confirmation Page!
-        <form>
-          <h2>Your order</h2>
-          <ul>
-            <li>
+      <div className="confirmationPage">
+        <form className="confirmationPage__form">
+          <h1 className="confirmationPage__title">YOUR ORDER</h1>
+          <ul className="confirmationPage__ul">
+            <li className="confirmationPage__li">
               {foodDrinksOrderItems && foodDrinksOrderItems.length > 0 ? (
                 foodDrinksOrderItems.map((item, index) => (
-                  <p key={index} onClick={submitHandler}>
-                    Order placed for {item.name}, quantity{" "}
-                    {foodDrinksQuantities}
+                  <p
+                    key={index}
+                    onClick={submitHandler}
+                    className="confirmationPage__data"
+                  >
+                    Order placed for:{" "}
+                    <span className="confirmationPage__ordered-item">
+                      {item.name}
+                    </span>
                   </p>
                 ))
               ) : (
-                <p>No items ordered</p>
+                <p className="confirmationPage__noData">No items ordered</p>
               )}
             </li>
           </ul>
         </form>{" "}
-        <button type="submit" onClick={submitHandler}>
+        <button
+          type="submit"
+          onClick={submitHandler}
+          className="confirmationPage__button"
+        >
           CONFIRM
         </button>
         <Link to="/">
-          <button>CANCEL</button>
+          <button className="confirmationPage__button">CANCEL</button>
         </Link>
       </div>
     );
