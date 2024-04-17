@@ -84,9 +84,15 @@ function FoodDrinksMenu({ foodDrinksMenuItem, orderItems, setOrderItems }) {
       <div className="menu__order--container">
         <div className="menu__order">
           <p className="menu__order--item">
-            Order Item:
-            {totalFoodDrinksOrder}
+            Order Item : {"  "}
+            {orderItems.map((item, index) => (
+              <span key={index} className="menu__order--selection">
+                {item.name},
+              </span>
+            ))}
           </p>
+          {/* {totalFoodDrinksOrder}
+          </p> */}
           <Link
             to="/ConfirmationPage"
             state={{

@@ -5,9 +5,20 @@ function Footer() {
     <div className="footer">
       <div className="footer__contact-container">
         <h1 className="footer__title">CONTACT INFO</h1>
-        <p>krrisantan@proton.me</p>
-        <p>linkedin.com/in/kristopher-koski</p>
-        <p>github.com/Krrisantan</p>
+        <a className="footer__info" href="mailto:krrisantan@proton.me">
+          krrisantan@proton.me
+        </a>{" "}
+        <br />
+        <a
+          className="footer__info"
+          href="http://linkedin.com/in/kristopher-koski"
+        >
+          linkedin.com/in/kristopher-koski
+        </a>{" "}
+        <br />
+        <a className="footer__info" href="http://github.com/Krrisantan">
+          github.com/Krrisantan
+        </a>
       </div>
     </div>
   );
