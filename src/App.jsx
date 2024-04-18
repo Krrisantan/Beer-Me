@@ -16,7 +16,8 @@ function App() {
     const getFoodDrinksMenuItem = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8888/foodDrinksRoutes"
+          "https://beerme-4e548aac6e70.herokuapp.com/foodDrinksRoutes"
+          // "http://localhost:8888/foodDrinksRoutes"
         );
         const foodDrinksData = response.data;
         setFoodDrinksMenuItem(foodDrinksData);
