@@ -17,9 +17,11 @@ function App() {
       try {
         const response = await axios.get(
           "https://beerme-4e548aac6e70.herokuapp.com/foodDrinksRoutes"
+
           // "http://localhost:8888/foodDrinksRoutes"
         );
         const foodDrinksData = response.data;
+        console.log(foodDrinksData);
         setFoodDrinksMenuItem(foodDrinksData);
       } catch (error) {
         console.error("Failed to fetch food menu list: ", error);
