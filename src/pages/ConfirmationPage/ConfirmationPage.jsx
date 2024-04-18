@@ -38,7 +38,7 @@ function ConfirmationPage({
           const foodDrinksName = foodDrinksOrderItems[i].name;
           console.log(foodDrinksName);
           const response = await axios.post(
-            "http://localhost:8888/ordersRoutes/orders",
+            "http://beerme-4e548aac6e70.herokuapp.com/ordersRoutes/orders",
             {
               name: foodDrinksName,
               table_number: `5`,
@@ -54,7 +54,7 @@ function ConfirmationPage({
           const foodDrinksName = foodDrinksOrderItems[i].name;
           console.log(foodDrinksName);
           const response = await axios.post(
-            "http://localhost:8888/ordersRoutes/orders",
+            "http://beerme-4e548aac6e70.herokuapp.com/ordersRoutes/orders",
             {
               name: foodDrinksName,
               table_number: `5`,
