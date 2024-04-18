@@ -69,11 +69,6 @@ function HomePage() {
           </Link>
         </div>
       </div>
-      {/* <div className="btn-container">
-        <button onClick={toggleScanner} className="btn btn--hero">
-          {isScanning ? "STOP SCANNING" : "SCAN TO ADD TO CLOSET"}
-        </button>
-      </div> */}
       {isScanning && (
         <div
           ref={scannerRef}

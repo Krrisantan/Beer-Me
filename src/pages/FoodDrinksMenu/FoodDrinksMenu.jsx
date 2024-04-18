@@ -91,8 +91,6 @@ function FoodDrinksMenu({ foodDrinksMenuItem, orderItems, setOrderItems }) {
               </span>
             ))}
           </p>
-          {/* {totalFoodDrinksOrder}
-          </p> */}
           <Link
             to="/ConfirmationPage"
             state={{

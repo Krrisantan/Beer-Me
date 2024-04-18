@@ -46,6 +46,7 @@ function ConfirmationPage({
           );
           console.log("Food & Drinks Order confirmed", response.data);
           navigate("/");
+          window.location.reload();
           return;
         }
       }
@@ -62,42 +63,13 @@ function ConfirmationPage({
           );
           console.log("Food and now Drinks Order confirmed", response.data);
           navigate("/");
+          window.location.reload();
           return;
         }
       }
     } catch (error) {
       console.error("Failed to confirm order", error);
     }
-
-    // if (selectedFoodDrinksOption && foodDrinksOrderItems && orderItems) {
-    //   return (
-    //     <div>
-    //       This is the Confirmation Page!
-    //       <form>
-    //         <h2>Your order</h2>
-    //         <ul>
-    //           <li>
-    //             {orderItems && orderItems.length > 0 ? (
-    //               orderItems.map((item, index) => (
-    //                 <p key={index} onClick={submitHandler}>
-    //                   Order placed for: {item.name}
-    //                 </p>
-    //               ))
-    //             ) : (
-    //               <p>No items ordered</p>
-    //             )}
-    //           </li>
-    //         </ul>
-    //       </form>{" "}
-    //       <button type="submit" onClick={submitHandler}>
-    //         CONFIRM
-    //       </button>
-    //       <Link to="/">
-    //         <button>CANCEL</button>
-    //       </Link>
-    //     </div>
-    //   );
-    // }
   };
 
   if (foodDrinksOrderItems || selectedFoodDrinksOption) {
