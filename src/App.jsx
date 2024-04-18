@@ -16,9 +16,8 @@ function App() {
     const getFoodDrinksMenuItem = async () => {
       try {
         const response = await axios.get(
-          "https://beerme-4e548aac6e70.herokuapp.com/foodDrinksRoutes"
-
-          // "http://localhost:8888/foodDrinksRoutes"
+          process.env.REACT_APP_API_URL + "/foodDrinksRoutes"
+          // "https://beerme-4e548aac6e70.herokuapp.com/foodDrinksRoutes"
         );
         const foodDrinksData = response.data;
         console.log(foodDrinksData);
